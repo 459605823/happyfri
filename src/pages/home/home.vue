@@ -1,11 +1,16 @@
 <template>
    <div>
+       <common-container father="home"></common-container>
    </div>
 </template>
 
 <script>
+import commonContainer from '../../common/commonContainer'
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: {
+    commonContainer
+  }
 }
 </script>
 
