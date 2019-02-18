@@ -55,7 +55,7 @@ export default {
   created () {
     this.computedScore()
     this.showScoreTip()
-    // document.body.style.backgroundImage = 'url(./static/img/4-1.jpg)'
+    document.body.style.backgroundImage = 'url(./static/images/4-1.jpg)'
   }
 }
 </script>

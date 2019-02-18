@@ -75,7 +75,7 @@ export default {
   created () {
     if (this.father === 'home') {
       this.init()
-      // document.body.style.backgroundImage = 'url(./static/img/1-1.jpg)'
+      document.body.style.backgroundImage = 'url(./static/images/1-1.jpg)'
     }
   }
 }
