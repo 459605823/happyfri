@@ -9,6 +9,7 @@
       <router-link to="item" class="start button"></router-link>
     </div>
     <div v-if="father == 'item'">
+      <div class="countdown" v-if="showCountDown">还剩<span>{{time}}</span>秒</div>
       <div class="item-list-wrapper">
         <div class="item-list">
           <header class="item-title">{{itemDetail[itemNum-1].topic_name}}</header>
@@ -34,7 +35,10 @@ export default {
   data () {
     return {
       choosedType: null,
-      choosedId: null
+      choosedId: null,
+      showCountDown: false,
+      time: 10,
+      flag: false
     }
   },
   computed: mapState([
@@ -70,7 +74,40 @@ export default {
         case 2: return 'C'
         case 3: return 'D'
       }
+    },
+    timeDown () {
+      if (this.time > 0) {
+        this.time--
+      }
+      if (this.time === 3) {
+        this.showCountDown = true
+      }
+      if (this.time === 0) {
+        this.flag = true
+        this.showCountDown = false
+      }
+    },
+    timer () {
+      setInterval(() => {
+        if (this.flag === true) {
+          clearInterval(this.timer)
+          if (this.choosedType != null) {
+            this.choosedType = null
+            this.nextItem(this.choosedId)
+            this.time = 10
+            this.flag = false
+          } else if (this.itemNum < this.itemDetail.length) {
+            this.nextItem(0)
+            this.time = 10
+            this.flag = false
+          }
+        }
+        this.timeDown()
+      }, 1000)
     }
+  },
+  mounted () {
+    this.timer()
   },
   created () {
     if (this.father === 'home') {
@@ -128,6 +165,16 @@ export default {
   }
   .submit {
       background-image: url('/static/images/3-1.png')
+  }
+  .countdown {
+    font-size: .3rem;
+    color: #fa0;
+    position: absolute;
+    top: 3.2rem;
+    left: 4rem;
+    span {
+      margin: 0 0.1rem 0 .1rem;
+    }
   }
   .item-list-wrapper {
       @extend .home-back;

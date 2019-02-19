@@ -1,5 +1,5 @@
 export default {
-  itemNum: 1,
+  itemNum: 1, // 当前显示第几道题
   /* eslint-disable */
   itemDetail: [{
     "topic_id": 20,
@@ -157,5 +157,5 @@ export default {
       "is_standard_answer": 0
     }]
   }],
-  answerid: []
+  answerid: [] // 记录答案
 }
